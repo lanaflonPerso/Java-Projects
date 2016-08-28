@@ -31,7 +31,7 @@ public class Event {
     private User user;
 
     //@OneToMany(mappedBy = "event")
-    //private Set<Comment_event> cmntevents = new HashSet<Comment_event>();
+    //private Set<Comment_event> cmntevents = new HashSet<>();
 
     @Column(nullable = false)
     private Date date= new Date();

@@ -22,6 +22,9 @@
             </ul>
         </div>
     </div>
+    <b><div>Filter by Category</div></b>
+    <a href="#" th:each="category : ${allCategories}" th:text="${category.name}" th:href="@{/posts/index/{categoryName}/(categoryName=${category.name})}"></a>
+    <br/>
 
     <table class="table">
         <thead>

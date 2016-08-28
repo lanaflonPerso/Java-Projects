@@ -6,6 +6,7 @@ import booklibrary.models.Post;
 import booklibrary.models.User;
 import booklibrary.pagination.Pager;
 import booklibrary.repositories.CategoryRepository;
+import booklibrary.services.CategoryService;
 import booklibrary.services.NotificationService;
 import booklibrary.services.PostService;
 import booklibrary.services.UserService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +46,9 @@ public class PostsController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @RequestMapping("/posts/view/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.findById(id);
@@ -66,10 +71,13 @@ public class PostsController {
         Page<Post> posts = postService.findAllPageable(new PageRequest(evalPage, evalPageSize));
         Pager pager = new Pager(posts.getTotalPages(), posts.getNumber(), BUTTONS_TO_SHOW);
 
+        List<Category> allCategories = categoryService.findAll();
+
         modelAndView.addObject("posts", posts);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
+        modelAndView.addObject("allCategories", allCategories);
 
         return modelAndView;
     }
@@ -169,6 +177,26 @@ public class PostsController {
         postService.edit(post);
         notifyService.addInfoMessage("Post change successful");
         return "redirect:/posts/index";
+    }
+
+    @RequestMapping("/posts/index/{categoryName}")
+    public String postsByCategory(@PathVariable("categoryName") String categoryName, Model model){
+
+        Category category = categoryRepository.findCategoryByName(categoryName);
+
+        List<Post> allPosts = postService.findAll();
+
+        List<Post> postsByCategory = new ArrayList<>();
+
+        for (Post post : allPosts) {
+            if(post.getCategory() == category){
+                postsByCategory.add(post);
+            }
+        }
+
+        model.addAttribute("postsByCategory", postsByCategory);
+
+        return "posts/postsByCategory";
     }
 }
 

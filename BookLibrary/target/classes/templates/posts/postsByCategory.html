@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Posts</title>
+</head>
+
+<body>
+<header th:replace="layout :: site-header" />
+
+<h1>Posts</h1>
+<main id="allPosts">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Date</th>
+            <th>Author</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="post : ${postsByCategory}">
+            <td>
+                <span th:text="${post.category.name}"/>
+            </td>
+            <td>
+                <span th:text="${post.title}"/>
+            </td>
+            <td>
+                <span th:text="${post.body}"/>
+            </td>
+            <td>
+                <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}"/>
+            </td>
+            <td>
+                <span th:text="${post.author.fullname}"/>
+                (<span th:text="${post.author.username}"/>)
+            </td>
+            <td>
+                <a href="#" th:href="@{/posts/confirmdelete/{id}/(id=${post.id})}">Delete</a>
+                <a href="#" th:href="@{/posts/details/{id}/(id=${post.id})}">Details</a>
+                <a href="#" th:href="@{/posts/edit/{id}/(id=${post.id})}">Edit</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</main>
+<div><a href="posts/index.html" th:href="@{/posts/index}">[Go Back]</a></div>
+<footer th:replace="layout :: site-footer" />
+</body>
+
+</html>

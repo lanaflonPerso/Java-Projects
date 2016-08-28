@@ -47,9 +47,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Event> events = new HashSet<Event>();
 
-    //@OneToMany(mappedBy = "user")
-    //private Set<Comment_event> cmntevents = new HashSet<Comment_event>();
-    //foreign key
+    @OneToMany(mappedBy = "user")
+    private Set<Comment_event> cmntevents = new HashSet<Comment_event>();
+
     @OneToMany(mappedBy = "user")
     private Set<Comment_post> cmntposts = new HashSet<Comment_post>();
 
@@ -149,13 +149,13 @@ public class User {
         this.events = events;
     }
 
-    //public Set<Comment_event> getCmntevents() {
-    //    return cmntevents;
-    //}
+    public Set<Comment_event> getCmntevents() {
+        return cmntevents;
+    }
 
-    //public void setCmntevents(Set<Comment_event> cmntevents) {
-    //    this.cmntevents = cmntevents;
-    //}
+    public void setCmntevents(Set<Comment_event> cmntevents) {
+        this.cmntevents = cmntevents;
+    }
 
     public Set<Comment_post> getCmntposts() {
         return cmntposts;
@@ -194,7 +194,7 @@ public class User {
                 ", books=" + books +
                 ", cmntbooks=" + cmntbooks +
                 ", events=" + events +
-      //          ", cmntevents=" + cmntevents +
+                ", cmntevents=" + cmntevents +
                 ", cmntposts=" + cmntposts +
                 '}';
     }

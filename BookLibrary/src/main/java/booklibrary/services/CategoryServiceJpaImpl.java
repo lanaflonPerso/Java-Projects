@@ -25,9 +25,4 @@ public class CategoryServiceJpaImpl implements CategoryService{
         return this.categoryRepository.save(category);
     }
 
-    @Override
-    public Category findCategoryByName(String name) {
-        return categoryRepository.findCategoryByName(name);
-    }
-
 }
