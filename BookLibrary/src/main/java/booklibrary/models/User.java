@@ -29,6 +29,9 @@ public class User {
     private String picturelink;
 
     @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = false)
     private Date date = new Date();
 
     @OneToMany(mappedBy = "author")
@@ -107,6 +110,15 @@ public class User {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Set<Post> getPosts() {
@@ -188,6 +200,7 @@ public class User {
                 ", fullname='" + fullname + '\'' +
                 ", email='" + email + '\'' +
                 ", picturelink='" + picturelink + '\'' +
+                ", role='" + role + '\'' +
                 ", date=" + date +
                 ", posts=" + posts +
                 ", roles=" + roles +

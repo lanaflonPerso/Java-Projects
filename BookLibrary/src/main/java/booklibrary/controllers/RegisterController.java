@@ -43,6 +43,12 @@ public class RegisterController {
             return "users/register";
         }
 
+        user.setUsername(registerForm.getUsername());
+        user.setPassword_hash(registerForm.getPassword_hash());
+        user.setFullname(registerForm.getFullname());
+        user.setEmail(registerForm.getEmail());
+        user.setRole("User");
+
         userService.create(user);
 
         notifyService.addInfoMessage("Register successful");

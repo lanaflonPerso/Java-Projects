@@ -73,11 +73,22 @@ public class PostsController {
 
         List<Category> allCategories = categoryService.findAll();
 
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User currentUser = userService.findUserByUsername(user.getUsername());
+
         modelAndView.addObject("posts", posts);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
         modelAndView.addObject("allCategories", allCategories);
+        if(currentUser.getRole() != "Admin") {
+            modelAndView.addObject("currentUser", currentUser);
+        }
+        else {
+            currentUser = null;
+            modelAndView.addObject("currentUser", currentUser);
+        }
 
         return modelAndView;
     }

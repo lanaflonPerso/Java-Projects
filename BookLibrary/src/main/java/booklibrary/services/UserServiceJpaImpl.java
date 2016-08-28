@@ -82,6 +82,7 @@ public class UserServiceJpaImpl implements UserService {
         user.setFullname(fullname);
         user.setDate(new Date());
         user.setEmail(email);
+        user.setRole("User");
         return user;
     }
 

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package booklibrary.models;
 
@@ -27,10 +27,10 @@ public class Role implements Serializable
 	private Integer id;
 	@Column(name="role_name",nullable=false)
 	private String roleName;
-	
+
 	public Role() {
 	}
-	
+
 	public Role(String roleName) {
 		this.roleName = roleName;
 	}
