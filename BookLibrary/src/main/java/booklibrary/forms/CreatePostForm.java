@@ -1,5 +1,7 @@
 package booklibrary.forms;
 
+import booklibrary.models.Category;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,6 +13,8 @@ public class CreatePostForm {
     private String title;
 
     private String body;
+
+    private Category category;
 
     public String getTitle() {
         return title;
@@ -26,5 +30,13 @@ public class CreatePostForm {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

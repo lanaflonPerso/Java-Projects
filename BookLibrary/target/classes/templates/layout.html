@@ -37,7 +37,7 @@
                 <div>Hello Guest!</div>
             </div>
         </div>
-
+    </header>
     <ul id="messages" th:with="notifyMessages=${session[T(booklibrary.services
           .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <li th:each="msg : ${notifyMessages}"
@@ -47,7 +47,7 @@
         <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
           T(booklibrary.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
     </ul>
-</header>
+
     </header>
 
 <h1>Welcome</h1>

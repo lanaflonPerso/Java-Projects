@@ -1,8 +1,7 @@
 package booklibrary.models;
 
-import booklibrary.models.Post;
-
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,12 +21,37 @@ public class User {
     @Column(length = 100)
     private String fullname;
 
+
+    @Column(nullable = false,length = 100, unique = true)
+    private String email;
+
+    @Column(length = 100)
+    private String picturelink;
+
+    @Column(nullable = false)
+    private Date date = new Date();
+
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="user_id")
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Book> books = new HashSet<Book>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment_book> cmntbooks = new HashSet<Comment_book>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Event> events = new HashSet<Event>();
+
+    //@OneToMany(mappedBy = "user")
+    //private Set<Comment_event> cmntevents = new HashSet<Comment_event>();
+    //foreign key
+    @OneToMany(mappedBy = "user")
+    private Set<Comment_post> cmntposts = new HashSet<Comment_post>();
 
     public Long getId() {
         return id;
@@ -61,6 +85,30 @@ public class User {
         this.fullname = fullname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPicturelink() {
+        return picturelink;
+    }
+
+    public void setPicturelink(String picturelink) {
+        this.picturelink = picturelink;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Set<Post> getPosts() {
         return posts;
     }
@@ -75,6 +123,46 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public Set<Comment_book> getCmntbooks() {
+        return cmntbooks;
+    }
+
+    public void setCmntbooks(Set<Comment_book> cmntbooks) {
+        this.cmntbooks = cmntbooks;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    //public Set<Comment_event> getCmntevents() {
+    //    return cmntevents;
+    //}
+
+    //public void setCmntevents(Set<Comment_event> cmntevents) {
+    //    this.cmntevents = cmntevents;
+    //}
+
+    public Set<Comment_post> getCmntposts() {
+        return cmntposts;
+    }
+
+    public void setCmntposts(Set<Comment_post> cmntposts) {
+        this.cmntposts = cmntposts;
     }
 
     public User() {
@@ -98,8 +186,16 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password_hash='" + password_hash + '\'' +
                 ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                ", picturelink='" + picturelink + '\'' +
+                ", date=" + date +
                 ", posts=" + posts +
                 ", roles=" + roles +
+                ", books=" + books +
+                ", cmntbooks=" + cmntbooks +
+                ", events=" + events +
+      //          ", cmntevents=" + cmntevents +
+                ", cmntposts=" + cmntposts +
                 '}';
     }
 }

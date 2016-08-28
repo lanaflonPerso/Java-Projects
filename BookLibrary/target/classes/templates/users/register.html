@@ -7,7 +7,7 @@
 <body>
 <header th:replace="layout :: site-header" />
 
-<h1>Register in the Blog</h1>
+<h1>Register</h1>
 
 <form method="post" th:object="${registerForm}">
     <div><label for="username">Username:</label></div>
@@ -24,6 +24,11 @@
     <input id="fullname" type="text" name="fullname" th:value="*{fullname}" />
     <span class="formError" th:if="${#fields.hasErrors('fullname')}"
           th:errors="*{fullname}">Invalid fullname</span>
+
+    <div><label for="email" th:value="*{username}">Email:</label></div>
+    <input id="email" type="text" name="email" th:value="*{email}" />
+    <span class="formError" th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}">Invalid email</span>
 
     <div><input type="submit" value="Register"/>
         <a href="login.html" th:href="@{/users/login}">[Go to Login]</a></div>

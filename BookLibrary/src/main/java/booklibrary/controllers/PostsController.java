@@ -1,25 +1,23 @@
 package booklibrary.controllers;
 
 import booklibrary.forms.CreatePostForm;
-import booklibrary.forms.RegisterForm;
+import booklibrary.models.Category;
 import booklibrary.models.Post;
 import booklibrary.models.User;
 import booklibrary.pagination.Pager;
+import booklibrary.repositories.CategoryRepository;
 import booklibrary.services.NotificationService;
 import booklibrary.services.PostService;
 import booklibrary.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -42,6 +40,9 @@ public class PostsController {
 
     @Autowired
     private NotificationService notifyService;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @RequestMapping("/posts/view/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
@@ -74,12 +75,17 @@ public class PostsController {
     }
 
     @RequestMapping("/posts/create")
-    public String createPost(CreatePostForm createPostForm) {
+    public String createPost(CreatePostForm createPostForm, Model model) {
+
+        List<Category> allCategories = categoryRepository.findAll();
+
+        model.addAttribute("allCategories", allCategories);
+
         return "posts/create";
     }
 
     @RequestMapping(value = "/posts/create", method = RequestMethod.POST)
-    public String registerPage(@ModelAttribute("postForm") Post post, @Valid CreatePostForm createPostForm, BindingResult bindingResult) {
+    public String registerPage(@Valid CreatePostForm createPostForm, BindingResult bindingResult, @ModelAttribute("postForm") Post post) {
         if (bindingResult.hasErrors()) {
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "posts/create";
@@ -92,12 +98,14 @@ public class PostsController {
         post.setBody(createPostForm.getBody());
         post.setDate(new Date());
         post.setAuthor(myUser);
+        post.setCategory(createPostForm.getCategory());
 
         postService.create(post);
 
         notifyService.addInfoMessage("Post create successful");
         return "redirect:/posts/index";
     }
+
 
     @RequestMapping("/posts/delete/{id}")
     public String deletePost(@PathVariable("id") Long id){
@@ -128,6 +136,10 @@ public class PostsController {
     @RequestMapping("/posts/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model, CreatePostForm createPostForm){
 
+        List<Category> allCategories = categoryRepository.findAll();
+
+        model.addAttribute("allCategories", allCategories);
+
         Post post = postService.findById(id);
 
         model.addAttribute("post", post);
@@ -152,6 +164,7 @@ public class PostsController {
         post.setBody(createPostForm.getBody());
         post.setDate(new Date());
         post.setAuthor(myUser);
+        post.setCategory(createPostForm.getCategory());
 
         postService.edit(post);
         notifyService.addInfoMessage("Post change successful");

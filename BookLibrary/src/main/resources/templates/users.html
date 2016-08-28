@@ -8,6 +8,8 @@
 <body>
 <header th:replace="layout :: site-header" />
 
+<h1>Users</h1>
+
 <main id="allPosts">
 
     <table class="table">
@@ -17,6 +19,8 @@
             <th>Username</th>
             <th>Password</th>
             <th>Fullname</th>
+            <th>Date</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +37,12 @@
             </td>
             <td>
                 <span th:text="${user.fullname}"/>
+            </td>
+            <td>
+                <span th:text="${user.date}"/>
+            </td>
+            <td>
+                <span th:text="${user.email}"/>
             </td>
         </tr>
 

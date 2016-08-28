@@ -16,6 +16,8 @@ public class RegisterForm {
 
     private String fullname;
 
+    private String email;
+
     public String getUsername() {
         return username;
     }
@@ -38,5 +40,13 @@ public class RegisterForm {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -15,8 +15,8 @@ public interface UserService {
     User edit(User user);
     void deleteById(Long id);
     boolean checkpw(String username, String password_hash);
-    User login(String username, String password);
-    User register(String username, String password, String fullname);
+    //User login(String username, String password);
+    User register(String username, String password, String fullname, String email);
     void setPassword(String username, String newPassword);
     public User findUserByUsername(String username);
 }

@@ -8,6 +8,7 @@
 <body>
 <header th:replace="layout :: site-header" />
 
+<h1>Posts</h1>
 <main id="allPosts">
     <div class="row">
         <div th:if="${posts.getTotalPages() != 1}" class="form-group col-md-11 pagination-centered">
@@ -25,6 +26,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Category</th>
             <th>Title</th>
             <th>Body</th>
             <th>Date</th>
@@ -35,6 +37,9 @@
         <tbody>
 
         <tr th:each="post : ${posts}">
+            <td>
+                <span th:text="${post.category.name}"/>
+            </td>
             <td>
                 <span th:text="${post.title}"/>
             </td>

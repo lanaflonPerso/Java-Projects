@@ -5,6 +5,8 @@ import booklibrary.models.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -23,6 +25,12 @@ public class Post {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Category category;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Comment_post> cmntposts = new HashSet<Comment_post>();
 
     @Column(nullable = false)
     private Date date = new Date();
@@ -59,12 +67,28 @@ public class Post {
         this.author = author;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Set<Comment_post> getCmntposts() {
+        return cmntposts;
+    }
+
+    public void setCmntposts(Set<Comment_post> cmntposts) {
+        this.cmntposts = cmntposts;
     }
 
     public Post() {}
@@ -83,6 +107,8 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
                 ", author=" + author +
+                ", category=" + category +
+                ", cmntposts=" + cmntposts +
                 ", date=" + date +
                 '}';
     }

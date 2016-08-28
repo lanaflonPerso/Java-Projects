@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Categories</title>
+</head>
+<body>
+<header th:replace="layout :: site-header" />
+
+<h1>Add Category</h1>
+
+<form class="form-horizontal" method="post" th:object="${categoryForm}">
+    <div class="form-group">
+        <label class="col-sm-1 control-label" for="name">Name:</label>
+        <div class="col-sm-6">
+            <input class="form-control" id="name" type="text" name="name" th:value="*{name}" />
+            <span class="formError" th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Invalid name</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label  class="col-sm-1 control-label" for="type">Type:</label>
+        <div class="col-sm-6">
+            <input class="form-control" id="type" type="text" name="type" th:value="*{type}" />
+            <span class="formError" th:if="${#fields.hasErrors('type')}"
+                  th:errors="*{type}">Invalid type</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label  class="col-sm-1 control-label" for="about">About:</label>
+        <div class="col-sm-6">
+            <input class="form-control" id="about" type="text" name="about" th:value="*{about}" />
+            <span class="formError" th:if="${#fields.hasErrors('about')}"
+                  th:errors="*{about}">Invalid about</span>
+        </div>
+    </div>
+
+    <div><input type="submit" value="Add"/>
+        <a href="create.html" th:href="@{/posts/create}">[Go Back]</a></div>
+</form>
+
+<footer th:replace="layout :: site-footer" />
+</body>
+
+</html>

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,17 +69,19 @@ public class UserServiceJpaImpl implements UserService {
         return false;
     }
 
-    @Override
-    public User login(String username, String password_hash) {
-        throw new UnsupportedOperationException("Operation not implemented");
-    }
+    //@Override
+    //public User login(String username, String password_hash) {
+    //    throw new UnsupportedOperationException("Operation not implemented");
+    //}
 
     @Override
-    public User register(String username, String password_hash, String fullname) {
+    public User register(String username, String password_hash, String fullname, String email) {
         User user = new User();
         user.setUsername(username);
         user.setPassword_hash(password_hash);
         user.setFullname(fullname);
+        user.setDate(new Date());
+        user.setEmail(email);
         return user;
     }
 
