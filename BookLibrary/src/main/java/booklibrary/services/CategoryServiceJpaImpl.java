@@ -1,6 +1,7 @@
 package booklibrary.services;
 
 import booklibrary.models.Category;
+import booklibrary.models.Comment_post;
 import booklibrary.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;

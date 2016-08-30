@@ -1,15 +1,11 @@
 package booklibrary.controllers;
 
+import booklibrary.forms.CommentForm;
 import booklibrary.forms.CreatePostForm;
-import booklibrary.models.Category;
-import booklibrary.models.Post;
-import booklibrary.models.User;
+import booklibrary.models.*;
 import booklibrary.pagination.Pager;
 import booklibrary.repositories.CategoryRepository;
-import booklibrary.services.CategoryService;
-import booklibrary.services.NotificationService;
-import booklibrary.services.PostService;
-import booklibrary.services.UserService;
+import booklibrary.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +32,6 @@ public class PostsController {
     @Autowired
     private UserService userService;
 
-
     @Autowired
     private PostService postService;
 
@@ -48,6 +43,9 @@ public class PostsController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private Comment_postService comment_postService;
 
     @RequestMapping("/posts/view/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
@@ -143,12 +141,61 @@ public class PostsController {
     }
 
     @RequestMapping("/posts/details/{id}")
-    public String detailsPost(@PathVariable("id") Long id, Model model){
+    public String detailsPost(@PathVariable("id") Long id, Model model, CommentForm commentForm){
+
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User currentUser = userService.findUserByUsername(user.getUsername());
+
+        Post post = postService.findById(id);
+        List<Comment_post> comment_posts = comment_postService.findAll();
+
+        List<Comment_post> comment_postByPost = new ArrayList<>();
+
+        for ( Comment_post comment_post : comment_posts) {
+            if(comment_post.getPost() == post)
+            comment_postByPost.add(comment_post);
+        }
+        model.addAttribute("post", post);
+        model.addAttribute("commentForm", commentForm);
+        model.addAttribute("comment_posts", comment_posts);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("comment_postByPost", comment_postByPost);
+
+        return "posts/details";
+    }
+
+    @RequestMapping(value = "/posts/details/{id}", method = RequestMethod.POST)
+    public String detailsPostAddComment(@PathVariable("id") Long id, @ModelAttribute("comment_postForm") Comment_post comment_post, @Valid CommentForm commentForm, Model model){
+
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User currentUser = userService.findUserByUsername(user.getUsername());
 
         Post post = postService.findById(id);
 
-        model.addAttribute("post", post);
+        comment_post.setTextComment(commentForm.getTextComment());
+        comment_post.setDateComment(new Date());
+        comment_post.setUser(currentUser);
+        comment_post.setIdpost(post);
 
+        comment_postService.create(comment_post);
+
+        List<Comment_post> comment_posts = comment_postService.findAll();
+
+        List<Comment_post> comment_postByPost = new ArrayList<>();
+
+        for ( Comment_post comment_post2 : comment_posts) {
+            if(comment_post2.getPost() == post)
+                comment_postByPost.add(comment_post2);
+        }
+
+        model.addAttribute("post", post);
+        model.addAttribute("comment_posts", comment_posts);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("comment_postByPost", comment_postByPost);
+
+        notifyService.addInfoMessage("You add comment successful");
         return "posts/details";
     }
 

@@ -13,9 +13,6 @@ public class Comment_post {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Post post;
 
-    @Column( length = 100)
-    private String TitleComment;
-
     @Column( length = 500)
     private String textComment;
 
@@ -33,31 +30,31 @@ public class Comment_post {
     public Post getPost() { return post;  }
     public void setIdpost(Post post) {this.post = post;}
 
-    public String getTitleComment() { return TitleComment;  }
-    public void setTitleComment(String titleComment) { TitleComment = titleComment;}
-
-    public String getTextComment() {  return textComment;  }
-    public void setTextComment(String textComment) {    this.textComment = textComment;}
-
     public User getUser() { return user; }
     public void setUser(User user) {  this.user = user;}
 
     public Date getDateComment() {  return dateComment; }
     public void setDateComment(Date dateComment) {    this.dateComment = dateComment;}
 
+    public String getTextComment() {
+        return textComment;
+    }
+
+    public void setTextComment(String textComment) {
+        this.textComment = textComment;
+    }
+
     public Comment_post() {
     }
 
     public Comment_post(Post post,String TitleComment, String textComment) {
         this.post= post;
-        this.TitleComment= TitleComment;
         this.textComment = textComment;
     }
 
     public Comment_post(Long idCmntPost, Post post,String TitleComment, String textComment) {
         this.idCmntPost = idCmntPost;
         this.post= post;
-        this.TitleComment = TitleComment;
         this.textComment = textComment;
     }
 
@@ -66,7 +63,6 @@ public class Comment_post {
         return "Category{" +
                 "idCmntPost=" +idCmntPost +
                 "postid=" +post +
-                ", TitleComment='" +TitleComment + '\'' +
                 ", textComment='" + textComment + '\'' +
                 '}';
     }

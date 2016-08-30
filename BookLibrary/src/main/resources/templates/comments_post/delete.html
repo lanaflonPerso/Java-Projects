@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Confirmation Delete</title>
+</head>
+
+<body>
+
+<header th:replace="layout :: site-header" />
+
+<h1>Are yoy sure want to delete this Comment?</h1>
+<main id="posts">
+    <article>
+        <div class="date">
+            <i>Posted on</i>
+            <span th:text="${comment_post.dateComment}">22-May-2016</span>
+            <br/>
+            <i>By</i>
+            <span th:if="${comment_post.user.fullname != null}" th:text="${comment_post.user.fullname}" />
+            (<span th:if="${comment_post.user.fullname != null}" th:text="${comment_post.user.username}" />)
+        </div>
+        <br/>
+        <h2 class="title" th:text="${comment_post.textComment}">Text:</h2>
+        <form th:action="@{/comments_post/confirmdelete/{id}/(id=${comment_post.idCmntPost})}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </article>
+</main>
+<div><a href="posts/details.html" th:href="@{/posts/details/{id}/(id=${comment_post.post.id})}">[Go Back]</a></div>
+
+<footer th:replace="layout :: site-footer" />
+
+</body>
+
+</html>

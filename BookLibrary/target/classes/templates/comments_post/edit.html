@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Comment</title>
+</head>
+
+<body>
+
+<header th:replace="layout :: site-header" />
+
+<h1>Edit Comment</h1>
+
+<form class="form-horizontal" method="post" th:object="${comment_post}" th:action="@{changeComment/{id}/(id=${comment_post.idCmntPost})}">
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Text:</label>
+        <div class="col-sm-6">
+            <input class="form-control" id="textComment" type="text" name="textComment" th:value="*{textComment}" />
+            <span class="formError" th:if="${#fields.hasErrors('textComment')}"
+                  th:errors="*{textComment}">Invalid title</span>
+        </div>
+    </div>
+    <div><input type="submit" value="Edit"/>
+    </div>
+</form>
+
+<div><a href="posts/details.html" th:href="@{/posts/details/{id}/(id=${comment_post.post.id})}">[Go Back]</a></div>
+<footer th:replace="layout :: site-footer" />
+</body>
+
+</html>

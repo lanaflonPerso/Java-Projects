@@ -21,10 +21,71 @@
         </div>
         <br/>
         <p class="content" th:utext="${post.body}">Post content</p>
-    </article>
-</main>
-<div><a href="posts/index.html" th:href="@{/posts/index}">[Go Back]</a></div>
 
+
+<div><a href="posts/index.html" th:href="@{/posts/index}">[Go Back]</a></div>
+<br/><br/><br/>
+        <form class="form-horizontal" method="post" th:object="${commentForm}" th:action="@{/posts/details/{id}/(id=${post.id})}">
+        <div class="form-group">
+            <label  class="col-sm-1 control-label" for="textComment" th:value="*{textComment}">Comment:</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" id="textComment" rows="3" name="textComment" th:value="*{textComment}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <input type="submit" value="Submit"/>
+            </div>
+        </div>
+            </form>
+    </article>
+
+    <h3>Comments</h3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Text</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="comment_post : ${comment_postByPost}">
+            <td>
+                <span th:text="${comment_post.user.fullname}"/>
+                (<span th:text="${comment_post.user.username}"/>)
+            </td>
+            <td>
+                <span th:text="${comment_post.textComment}"/>
+            </td>
+            <td>
+                <span th:text="${comment_post.dateComment}"/>
+            </td>
+            <td>
+                <span th:if="${currentUser.role == 'Admin'}">
+                    <a href="#" th:href="@{/comments_post/confirmdelete/{id}/(id=${comment_post.idCmntPost})}">Delete</a>
+                    </span>
+                <span  th:if="${currentUser.role != 'Admin'}">
+                    <span  th:if="${post.author == currentUser}">
+                        <a href="#" th:href="@{/comments_post/confirmdelete/{id}/(id=${comment_post.idCmntPost})}">Delete</a>
+                    </span>
+                </span>
+                <span th:if="${currentUser.role == 'Admin'}">
+                    <a href="#" th:href="@{/comments_post/edit/{id}/(id=${comment_post.idCmntPost})}">Edit</a>
+                    </span>
+                <span  th:if="${currentUser.role != 'Admin'}">
+                    <span  th:if="${post.author == currentUser}">
+                        <a href="#" th:href="@{/comments_post/edit/{id}/(id=${comment_post.idCmntPost})}">Edit</a>
+                    </span>
+                </span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</main>
 <footer th:replace="layout :: site-footer" />
 </body>
 
