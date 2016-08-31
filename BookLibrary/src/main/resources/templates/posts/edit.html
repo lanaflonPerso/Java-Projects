@@ -24,7 +24,7 @@
         <div class="form-group">
             <label  class="col-sm-1 control-label">Body:</label>
             <div class="col-sm-6">
-                <input class="form-control" id="body" name="body" th:value="*{body}" />
+                <textarea class="form-control" id="body" name="body" rows="10" th:field="*{body}" />
                 <span class="formError" th:if="${#fields.hasErrors('body')}"
                       th:errors="*{body}">Invalid body</span>
             </div>

@@ -15,7 +15,7 @@
     <div class="form-group">
         <label class="col-sm-1 control-label">Text:</label>
         <div class="col-sm-6">
-            <input class="form-control" id="textComment" type="text" name="textComment" th:value="*{textComment}" />
+            <textarea class="form-control" id="textComment" type="text" name="textComment" rows="5" th:field="*{textComment}" />
             <span class="formError" th:if="${#fields.hasErrors('textComment')}"
                   th:errors="*{textComment}">Invalid title</span>
         </div>

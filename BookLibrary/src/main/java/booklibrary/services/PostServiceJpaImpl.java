@@ -38,6 +38,11 @@ public class PostServiceJpaImpl implements PostService {
     }
 
     @Override
+    public List<Post> findAllByVisits() {
+        return this.postRepo.findAllPostsByVisits();
+    }
+
+    @Override
     public Post findById(Long id) {
         return this.postRepo.findOne(id);
     }

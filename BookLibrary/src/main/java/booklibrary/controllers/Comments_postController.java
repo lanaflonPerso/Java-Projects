@@ -81,7 +81,7 @@ public class Comments_postController {
         comment_postById.setTextComment(commentForm.getTextComment());
         comment_postById.setDateComment(new Date());
         comment_postById.setUser(currentUser);
-        comment_postById.setIdpost(post);
+        comment_postById.setPost(post);
 
         comment_postService.create(comment_postById);
 
@@ -103,26 +103,26 @@ public class Comments_postController {
     }
 
     @RequestMapping(value = "/comments_post/confirmdelete/{id}", method = RequestMethod.POST)
-    public String ConfirmDeletePost(@PathVariable("id") Long id, @ModelAttribute("comment_postForm") Comment_post comment_post, Model model){
+    public String ConfirmDeletePost(@PathVariable("id") Long id, @ModelAttribute("comment_postForm") Comment_post comment_post, @Valid CommentForm commentForm,  Model model){
 
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         User currentUser = userService.findUserByUsername(user.getUsername());
 
-        Comment_post comment_postById = comment_postRepository.findOne(id);
-
-        List<Post> posts = postService.findAll();
+        List<Comment_post> comments_post = comment_postService.findAll();
 
         Post post = new Post();
 
-        for (Post p : posts) {
-            if(p.getCmntposts().contains(comment_postById)){
-                post = p;
+        for (Comment_post c : comments_post) {
+            if (c.getIdCmntPost() == id){
+                post = c.getPost();
             }
         }
-        model.addAttribute("post", post);
-
         comment_postService.deleteById(id);
+
+        List<Post> posts = postService.findAll();
+
+        model.addAttribute("post", post);
 
         List<Comment_post> comment_posts = comment_postService.findAll();
 
@@ -135,9 +135,10 @@ public class Comments_postController {
 
         model.addAttribute("comment_postByPost", comment_postByPost);
         model.addAttribute("currentUser", currentUser);
+        model.addAttribute("commentForm", commentForm);
 
         notifyService.addInfoMessage("Comment delete successful");
-        return "redirect:/posts/details";
+        return "posts/details";
     }
 
     @RequestMapping("/comments_post/confirmdelete/{id}")

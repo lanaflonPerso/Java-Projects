@@ -22,19 +22,21 @@ public class Comment_post {
     @Column(nullable = false)
     private Date dateComment = new Date();
 
-    public Long getIdCmntPost() { return idCmntPost; }
+    public Long getIdCmntPost() {
+        return idCmntPost;
+    }
+
     public void setIdCmntPost(Long idCmntPost) {
         this.idCmntPost = idCmntPost;
     }
 
-    public Post getPost() { return post;  }
-    public void setIdpost(Post post) {this.post = post;}
+    public Post getPost() {
+        return post;
+    }
 
-    public User getUser() { return user; }
-    public void setUser(User user) {  this.user = user;}
-
-    public Date getDateComment() {  return dateComment; }
-    public void setDateComment(Date dateComment) {    this.dateComment = dateComment;}
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
     public String getTextComment() {
         return textComment;
@@ -44,28 +46,45 @@ public class Comment_post {
         this.textComment = textComment;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getDateComment() {
+        return dateComment;
+    }
+
+    public void setDateComment(Date dateComment) {
+        this.dateComment = dateComment;
+    }
+
     public Comment_post() {
     }
 
-    public Comment_post(Post post,String TitleComment, String textComment) {
+    public Comment_post(Post post,String textComment) {
         this.post= post;
         this.textComment = textComment;
     }
 
-    public Comment_post(Long idCmntPost, Post post,String TitleComment, String textComment) {
+    public Comment_post(Long idCmntPost, Post post,String textComment, User user) {
         this.idCmntPost = idCmntPost;
         this.post= post;
         this.textComment = textComment;
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "Category{" +
-                "idCmntPost=" +idCmntPost +
-                "postid=" +post +
+        return "Comment_post{" +
+                "idCmntPost=" + idCmntPost +
+                ", post=" + post +
                 ", textComment='" + textComment + '\'' +
+                ", user=" + user +
+                ", dateComment=" + dateComment +
                 '}';
     }
-
-
 }

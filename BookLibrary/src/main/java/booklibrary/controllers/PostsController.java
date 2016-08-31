@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class PostsController {
@@ -67,7 +68,10 @@ public class PostsController {
         int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
 
         Page<Post> posts = postService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+
         Pager pager = new Pager(posts.getTotalPages(), posts.getNumber(), BUTTONS_TO_SHOW);
+        //List<Post> allPosts = this.postService.findAll().stream().sorted((e1,e2) -> e2.getVisits().compareTo(e1.getVisits())).collect(Collectors.toList());
+        List<Post> allPosts = postService.findAllByVisits();
 
         List<Category> allCategories = categoryService.findAll();
 
@@ -76,6 +80,7 @@ public class PostsController {
         User currentUser = userService.findUserByUsername(user.getUsername());
 
         modelAndView.addObject("posts", posts);
+        modelAndView.addObject("allPosts", allPosts);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -90,6 +95,7 @@ public class PostsController {
 
         return modelAndView;
     }
+
 
     @RequestMapping("/posts/create")
     public String createPost(CreatePostForm createPostForm, Model model) {
@@ -116,6 +122,7 @@ public class PostsController {
         post.setDate(new Date());
         post.setAuthor(myUser);
         post.setCategory(createPostForm.getCategory());
+        post.setVisits((long)0);
 
         postService.create(post);
 
@@ -148,6 +155,15 @@ public class PostsController {
         User currentUser = userService.findUserByUsername(user.getUsername());
 
         Post post = postService.findById(id);
+
+        Long visits = post.getVisits();
+
+        visits += 1;
+
+        post.setVisits(visits);
+
+        postService.edit(post);
+
         List<Comment_post> comment_posts = comment_postService.findAll();
 
         List<Comment_post> comment_postByPost = new ArrayList<>();
@@ -177,7 +193,7 @@ public class PostsController {
         comment_post.setTextComment(commentForm.getTextComment());
         comment_post.setDateComment(new Date());
         comment_post.setUser(currentUser);
-        comment_post.setIdpost(post);
+        comment_post.setPost(post);
 
         comment_postService.create(comment_post);
 

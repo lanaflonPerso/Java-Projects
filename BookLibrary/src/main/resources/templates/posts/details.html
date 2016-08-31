@@ -68,7 +68,7 @@
                     <a href="#" th:href="@{/comments_post/confirmdelete/{id}/(id=${comment_post.idCmntPost})}">Delete</a>
                     </span>
                 <span  th:if="${currentUser.role != 'Admin'}">
-                    <span  th:if="${post.author == currentUser}">
+                    <span  th:if="${comment_post.user == currentUser}">
                         <a href="#" th:href="@{/comments_post/confirmdelete/{id}/(id=${comment_post.idCmntPost})}">Delete</a>
                     </span>
                 </span>
@@ -76,7 +76,7 @@
                     <a href="#" th:href="@{/comments_post/edit/{id}/(id=${comment_post.idCmntPost})}">Edit</a>
                     </span>
                 <span  th:if="${currentUser.role != 'Admin'}">
-                    <span  th:if="${post.author == currentUser}">
+                    <span  th:if="${comment_post.user == currentUser}">
                         <a href="#" th:href="@{/comments_post/edit/{id}/(id=${comment_post.idCmntPost})}">Edit</a>
                     </span>
                 </span>

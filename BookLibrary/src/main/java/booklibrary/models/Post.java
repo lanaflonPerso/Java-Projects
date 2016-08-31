@@ -23,6 +23,8 @@ public class Post {
     @Lob @Column(nullable = true)
     private String body;
 
+    private Long visits;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
 
@@ -89,6 +91,14 @@ public class Post {
 
     public void setCmntposts(Set<Comment_post> cmntposts) {
         this.cmntposts = cmntposts;
+    }
+
+    public Long getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Long visits) {
+        this.visits = visits;
     }
 
     public Post() {}
