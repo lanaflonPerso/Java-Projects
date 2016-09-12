@@ -268,7 +268,13 @@ public class PostsController {
             }
         }
 
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User currentUser = userService.findUserByUsername(user.getUsername());
+
         model.addAttribute("postsByCategory", postsByCategory);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("categoryName", categoryName);
 
         return "posts/postsByCategory";
     }

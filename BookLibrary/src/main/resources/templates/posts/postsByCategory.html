@@ -8,8 +8,9 @@
 <body>
 <header th:replace="layout :: site-header" />
 
-<h1>Posts</h1>
 <main id="allPosts">
+
+    <h1>Posts by Category: <span th:text="${categoryName}"></span> </h1>
 
     <table class="table">
         <thead>
@@ -42,9 +43,23 @@
                 (<span th:text="${post.author.username}"/>)
             </td>
             <td>
-                <a href="#" th:href="@{/posts/confirmdelete/{id}/(id=${post.id})}">Delete</a>
+                <span th:if="${currentUser.role == 'Admin'}">
+                    <a href="#" th:href="@{/posts/confirmdelete/{id}/(id=${post.id})}">Delete</a>
+                    </span>
+                <span  th:if="${currentUser.role != 'Admin'}">
+                    <span  th:if="${post.author == currentUser}">
+                        <a href="#" th:href="@{/posts/confirmdelete/{id}/(id=${post.id})}">Delete</a>
+                    </span>
+                </span>
                 <a href="#" th:href="@{/posts/details/{id}/(id=${post.id})}">Details</a>
-                <a href="#" th:href="@{/posts/edit/{id}/(id=${post.id})}">Edit</a>
+                <span th:if="${currentUser.role == 'Admin'}">
+                    <a href="#" th:href="@{/posts/edit/{id}/(id=${post.id})}">Edit</a>
+                    </span>
+                <span  th:if="${currentUser.role != 'Admin'}">
+                    <span  th:if="${post.author == currentUser}">
+                        <a href="#" th:href="@{/posts/edit/{id}/(id=${post.id})}">Edit</a>
+                    </span>
+                </span>
             </td>
         </tr>
 

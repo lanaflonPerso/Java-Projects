@@ -7,10 +7,13 @@ import javax.validation.constraints.Size;
  * Created by Hristo on 27.08.2016 г..
  */
 public class CategoryForm {
+    @Size(min=1, max=1000, message = "Please fill title.")
     private String name;
 
+    @Size(min=1, max=1000, message = "Please fill title.")
     private String type;
 
+    @Size(min=1, max=1000, message = "Please fill title.")
     private String about;
 
     public String getName() {

@@ -15,12 +15,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(nullable = true, length = 300)
+    @Column(nullable = false, length = 300)
     private String title;
 
-    @NotNull
-    @Lob @Column(nullable = true)
+    @Lob @Column(nullable = false)
     private String body;
 
     private Long visits;
