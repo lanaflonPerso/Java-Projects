@@ -1,3 +1,3 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<% response.sendRedirect(request.getContextPath() + "/page/login.html"); %>
+<% response.sendRedirect(request.getContextPath() + "/page/index.html"); %>

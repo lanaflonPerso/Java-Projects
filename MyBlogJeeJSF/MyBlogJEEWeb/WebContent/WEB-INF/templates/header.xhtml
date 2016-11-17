@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head></h:head> 
 <body> 
@@ -11,13 +12,22 @@
    			<h:link outcome="login">
     			<h:graphicImage library="img" name="site-logo.png"/>
     		</h:link>
-    		<h:link href="home.xhtml" value="Home"/>
-   	    	<h:link href="login.xhtml" value="Login"/>
-   	    	<h:link href="register.xhtml" value="Register"/>  
-   	    	<h:link href="posts.xhtml" value="Posts"/>  
-   	    	<h:link href="createpost.xhtml" value="Create Post"/>
-   	    	<h:panelGroup layout="block" id="logged-in-info">
-    			Hello Guest!
+    		<h:link value="Home" outcome="index"/>
+   	    	<h:link value="Login" outcome="login"/>
+   	    	<h:link value="Register" outcome="register"/>  
+   	    	<h:link value="Posts" outcome="posts"/>  
+   	    	<h:link value="Create Post" outcome="createpost"/>
+   	    	<h:panelGroup layout="block" id="logged-in-info">    
+        		<h:form>
+    			<h:panelGroup rendered="#{not empty LOGGED_USER}">
+   					 <p>Hello, #{LOGGED_USER}</p>
+   					 <p:commandButton ajax="false" action="#{loginBean.logout}"
+				styleClass="btn btn-info" value="Logout" style="margin: 5% 0 5% 0;" />
+				</h:panelGroup>
+				</h:form>
+				<h:panelGroup rendered="#{empty LOGGED_USER}">
+   					 <p>Hello Guest!</p>
+				</h:panelGroup>
 			</h:panelGroup>       
    		</header>	
 	</ui:composition>	

@@ -1,0 +1,65 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+<title>My Project</title>
+</h:head>
+
+<body id="home">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+		<aside>
+    		<h2>Recent Posts</h2>
+		</aside>
+
+		<main id="posts">
+    		<article>
+        		<h2>Post1 Title</h2>
+        		<div class="date">
+           		<i>Posted on</i>
+           		<span>22-May-2016</span>
+           		<br/>
+           		<i>By</i>
+           		<span>Niki</span>
+        		</div>
+        		<br/>
+        		<p>Post1 content</p>
+    		</article>
+    		<article>
+        		<h2>Post2 Title</h2>
+        		<div class="date">
+           		<i>Posted on</i>
+           		<span>05-Sep-2010</span>
+           		<br/>
+           		<i>By</i>
+           		<span>Sasho</span>
+        		</div>
+        		<br/>
+        		<p>Post2 content</p>
+    		</article>
+    		<article>
+        		<h2>Post3 Title</h2>
+        		<div class="date">
+           		<i>Posted on</i>
+           		<span>21-Jan-2016</span>
+           		<br/>
+           		<i>By</i>
+           		<span>Eva</span>
+        		</div>
+        		<br/>
+        		<p>Post3 content</p>
+    		</article>
+		</main>
+		</ui:define>
+	</ui:composition>
+</body>
+
+</html>
+
