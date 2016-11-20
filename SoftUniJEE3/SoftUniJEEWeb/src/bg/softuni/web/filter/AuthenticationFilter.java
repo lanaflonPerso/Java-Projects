@@ -24,7 +24,7 @@ public class AuthenticationFilter implements Filter, Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	
+	public static final String PATH_INDEX_HTML = "/index.html";
 	public static final String PATH_INDEX = "/index.jsp";
 	public static final String PATH_LOGIN = "/page/login.html";
 	public static final String PATH_LOGOUT = "/page/logout.jsp";
@@ -76,7 +76,7 @@ public class AuthenticationFilter implements Filter, Serializable {
 		UserModel loggedUser = (UserModel) session.getAttribute("LOGGED_USER");
 
 
-		/*
+		/*s
 		 * Redirect to login page if there is no logged user and trying to access protected resource
 		 */
 		if (loggedUser == null) {

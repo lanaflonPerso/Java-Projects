@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Register</title>
+</h:head>
+
+<body id="registerBody">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<h:form styleClass="editForm">
+				<p:messages autoUpdate="false" id="loginDialogMessages"
+					globalOnly="false" styleClass="loginMessage" />
+
+				<p:outputPanel styleClass="alert alert-danger errorPanel"
+					rendered="#{createUserBean.hasErrors()}">
+					<p:messages autoUpdate="false" id="editParamMessages"
+						globalOnly="false" styleClass="messagesStyle" />
+				</p:outputPanel>
+
+				<h1 class="text-primary bold upper headPaddings">
+					<h:outputText value="#{msgs['edit.user.title']}" escape="false" />
+				</h1>
+
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="username" class="col-sm-1 control-label">#{msgs['label.username']}</label>
+					<p:inputText id="username" name="username" styleClass="editInput"
+						value="#{registerBean.user.username}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="username" class="col-sm-1 control-label">#{msgs['label.password']}</label>
+					<p:inputText id="password" name="password" styleClass="editInput"
+						value="#{registerBean.user.password}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="firstName" class="col-sm-1 control-label">#{msgs['label.firstName']}</label>
+					<p:inputText id="firstName" name="firstName" styleClass="editInput"
+						value="#{registerBean.user.firstName}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="lastName" class="col-sm-1 control-label">#{msgs['label.lastName']}</label>
+					<p:inputText id="lastName" name="lastName" styleClass="editInput"
+						value="#{registerBean.user.lastName}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="email" class="col-sm-1 control-label">#{msgs['label.email']}</label>
+					<p:inputText id="email" name="email" styleClass="editInput"
+						value="#{registerBean.user.email}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<div class="box-field">
+					<p:commandButton ajax="false" id="updateuserBtn"
+						styleClass="btn btn-primary createUserBtn"
+						value="#{msgs['button.register']}"
+						action="#{registerBean.createAction}">
+					</p:commandButton>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

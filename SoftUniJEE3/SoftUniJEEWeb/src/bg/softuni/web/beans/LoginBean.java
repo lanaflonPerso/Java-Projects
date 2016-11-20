@@ -39,8 +39,8 @@ public class LoginBean implements Serializable {
 	private String username;
 	private String password;
 
-	private static final String SUCCESS_LOGIN_REDIRECT = "/page/listUsers?faces-redirect=true";
-	private static final String LOGIN_PAGE_REDIRECT = "/page/login?faces-redirect=true";
+	private static final String SUCCESS_LOGIN_REDIRECT = "/page/posts?faces-redirect=true";
+	private static final String LOGIN_PAGE_REDIRECT = "/pageAccess/index?faces-redirect=true";
 
 	@PostConstruct
 	public void init() {

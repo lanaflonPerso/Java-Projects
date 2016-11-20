@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+</h:head>
+
+<body id="loginBody">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<p:messages autoUpdate="false" id="loginDialogMessages"
+				globalOnly="false" styleClass="loginMessage" />
+			<h:panelGroup id="mainPageContent" layout="block">
+				<h:form styleClass="loginForm">
+					<h:panelGroup>
+					<h1 class="text-primary bold upper headPaddings">
+						<h:outputText value="#{msgs['login.user.title']}" escape="false" />
+					</h1>
+					</h:panelGroup>
+					<br/>
+					<h:panelGroup layout="block">
+					<label class="col-sm-1 control-label">Username:</label>
+						<p:inputText value="#{loginBean.username}" id="username"
+							styleClass="loginInputField" required="true"
+							requiredMessage="Username is required field">
+							<p:watermark for="username" value="Username" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<br clear="all" />
+					<br />
+
+					<h:panelGroup layout="block">
+					<label class="col-sm-1 control-label">Password:</label>
+						<p:password value="#{loginBean.password}" id="password"
+							styleClass="loginInputField" required="true"
+							requiredMessage="Password is required field">
+							<p:watermark for="password" value="Password" />
+						</p:password>
+					</h:panelGroup>
+
+					<br clear="all" />
+					<br />
+					<h:panelGroup layout="block">
+						<p:commandButton ajax="false" action="#{loginBean.login}"
+							styleClass="btn btn-info" value="Login" />
+					</h:panelGroup>
+				</h:form>
+			</h:panelGroup>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

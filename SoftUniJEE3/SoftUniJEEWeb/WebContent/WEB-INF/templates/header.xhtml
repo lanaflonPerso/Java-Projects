@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+</h:head>
+<body> 
+	<ui:composition> 
+   		<header>
+   			<h:link outcome="index">
+    			<h:graphicImage library="img" name="site-logo.png"/>
+    		</h:link>
+    		<h:link value="Home" outcome="index"/>
+   	    	&nbsp;
+   	    	<h:link value="Login" outcome="login"/>
+   	    	&nbsp;
+   	    	<h:link value="Register" outcome="register"/>  
+   	    	&nbsp;
+   	    	<h:link value="Posts" outcome="posts"/>
+   	    	&nbsp;
+   	    	<h:link value="Create Post" outcome="createPost"/>
+   	    	<h:panelGroup layout="block" id="logged-in-info">    
+        		<h:form>
+    			<h:panelGroup rendered="#{not empty LOGGED_USER}">
+   					 <p>Hello, #{LOGGED_USER.firstName}</p>
+   					 <p:commandButton ajax="false" action="#{loginBean.logout}"
+				styleClass="btn btn-info" value="Logout" style="margin: 5% 0 5% 0;" />
+				</h:panelGroup>
+				</h:form>
+				<h:panelGroup rendered="#{empty LOGGED_USER}">
+   					 <p>Hello Guest!</p>
+				</h:panelGroup>
+			</h:panelGroup>       
+   		</header>	
+	</ui:composition>	
+</body> 
+</html>

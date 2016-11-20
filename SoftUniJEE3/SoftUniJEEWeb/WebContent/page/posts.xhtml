@@ -1,0 +1,65 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+<h:head>
+	<title>My Project</title>
+</h:head>
+
+<body id="home">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<h1>Posts</h1>
+			<br></br>
+			<p:dataTable class="table" value="#{homeBean.getAllPosts()}"
+				var="post" rows="5" widgetVar="usersTable" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				paginatorPosition="top" rowsPerPageTemplate="5,10,15">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()"
+							style="width:150px" placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
+
+				<p:column headerText="#{msgs['post.title']}"
+					filterBy="#{post.title}" filterMatchMode="startsWith">
+					<h:outputText value="#{post.title}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['post.content']}"
+					id="postContent"
+					filterBy="#{post.content}" filterMatchMode="startsWith">
+					<h:outputText value="#{post.content}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['post.date']}"
+					filterBy="#{post.date}" filterMatchMode="startsWith">
+					<h:outputText value="#{post.date}" />
+				</p:column>
+
+				<p:column headerText="#{msgs['post.author']}"
+					filterBy="#{post.author.firstName} #{post.author.lastName}" filterMatchMode="startsWith">
+					<h:outputText value="#{post.author.firstName} #{post.author.lastName}" />
+				</p:column>
+
+				<p:column exportable="false" styleClass="colType"
+					style="width:70px;">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.columns_actions}" />
+					</f:facet>
+				</p:column>
+			</p:dataTable>
+		</ui:define>
+	</ui:composition>
+</body>
+
+</html>
+

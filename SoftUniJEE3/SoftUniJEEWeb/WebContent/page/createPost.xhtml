@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Create Post</title>
+</h:head>
+
+<body id="createPostBody">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<p:messages autoUpdate="false" id="loginDialogMessages"
+				globalOnly="false" styleClass="loginMessage" />
+			<h:form styleClass="editForm">
+				<p:outputPanel styleClass="alert alert-danger errorPanel"
+					rendered="#{createUserBean.hasErrors()}">
+					<p:messages autoUpdate="false" id="editParamMessages"
+						globalOnly="false" styleClass="messagesStyle" />
+				</p:outputPanel>
+
+				<h1 class="text-primary bold upper headPaddings">
+					<h:outputText value="#{msgs['edit.post.title']}" escape="false" />
+				</h1>
+
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="username" class="col-sm-1 control-label">#{msgs['label.title']}</label>
+					<p:inputText id="username" name="username" styleClass="editInput"
+						cols="60" value="#{createPostBean.post.title}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<br clear="all" />
+				<br />
+
+				<h:panelGroup layout="block">
+					<label for="username" class="col-sm-1 control-label">#{msgs['label.content']}</label>
+					<p:inputTextarea id="password" name="password"
+						styleClass="editInput" rows="13" cols="60"
+						value="#{createPostBean.post.content}"
+						requiredMessage="#{msgs.code_error_required}">
+						<f:validateLength maximum="4000" />
+					</p:inputTextarea>
+				</h:panelGroup>
+
+				<div class="box-field">
+					<p:commandButton ajax="false" id="updateuserBtn"
+						styleClass="btn btn-primary createUserBtn"
+						value="#{msgs['button.createPost']}"
+						action="#{createPostBean.createPost}">
+					</p:commandButton>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
