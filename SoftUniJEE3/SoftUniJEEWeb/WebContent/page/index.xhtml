@@ -1,0 +1,45 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>My Project</title>
+</h:head>
+
+<body id="home">
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<aside>
+			<h2>Recent Posts</h2>
+			<ui:repeat value="#{homeBean.getAsidePosts()}" var="post">
+			<h:form>
+				<h:commandLink value="#{post.title}" action="#{homeBean.viewPost}"/>
+			</h:form>
+			</ui:repeat>
+			</aside>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span8 offset2">
+						<ui:repeat value="#{homeBean.get3Posts()}" var="post">
+							<h2><h:outputText value="#{post.title}" /></h2>
+							<i>Posted on </i>
+							<h:outputText value="#{post.date}" /><br/>
+							<i>By </i>
+							<h:outputText value="#{post.author.firstName} #{post.author.lastName}" /><br/><br/>
+							<h:outputText value="#{post.content}" /><hr></hr>
+						</ui:repeat>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+
+</html>
+

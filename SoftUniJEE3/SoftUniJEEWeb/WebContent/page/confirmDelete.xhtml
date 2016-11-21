@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+		<ui:define name="defaultContent">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span8 offset2">
+						<h:panelGroup layout="block">
+							<h2>
+								<h:outputText value="#{postsBean.post.title}" />
+							</h2>
+							<i>Posted on </i>
+							<h:outputText value="#{postsBean.post.date}" />
+							<br />
+							<i>By </i>
+							<h:outputText
+								value="#{postsBean.post.author.firstName} #{postsBean.post.author.lastName}" />
+							<br />
+							<br />
+							<h:outputText value="#{postsBean.post.content}" />
+						</h:panelGroup>
+					</div>
+					<br/>
+					<h:form>
+						<div class="box-field">
+							<p:commandButton ajax="false" id="updateuserBtn"
+								styleClass="btn btn-primary createUserBtn"
+								value="#{msgs['button.createPost']}"
+								action="#{postsBean.delPost()}">
+							</p:commandButton>
+						</div>
+					</h:form>
+					<br />
+					<p:commandButton onclick="window.history.back();" value="[Go Back]" />
+				</div>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
