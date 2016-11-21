@@ -25,7 +25,7 @@
    	    	<h:panelGroup layout="block" id="logged-in-info">    
         		<h:form>
     			<h:panelGroup rendered="#{not empty LOGGED_USER}">
-   					 <p>Hello, #{LOGGED_USER.firstName}</p>
+   					 <h:outputText value="Hello, #{LOGGED_USER.firstName} " />
    					 <p:commandButton ajax="false" action="#{loginBean.logout}"
 				styleClass="btn btn-info" value="Logout" style="margin: 5% 0 5% 0;" />
 				</h:panelGroup>

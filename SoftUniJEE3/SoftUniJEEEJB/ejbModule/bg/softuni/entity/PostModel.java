@@ -19,6 +19,7 @@ public class PostModel extends BaseDomainObject {
 	private String title;
 	private String content;
 	private Date date;
+	private Integer rate;
 	private UserModel author;
 
 	@Column(name = "title", length = 100, nullable = false)
@@ -47,6 +48,15 @@ public class PostModel extends BaseDomainObject {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	@Column(name="rate", nullable = false)
+	public Integer getRate() {
+		return rate;
+	}
+
+	public void setRate(Integer rate) {
+		this.rate = rate;
 	}
 
 	@JoinColumn(name = "author_id", referencedColumnName = "id")

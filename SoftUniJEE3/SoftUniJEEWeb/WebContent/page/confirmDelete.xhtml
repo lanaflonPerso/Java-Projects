@@ -30,11 +30,14 @@
 					<br/>
 					<h:form>
 						<div class="box-field">
-							<p:commandButton ajax="false" id="updateuserBtn"
-								styleClass="btn btn-primary createUserBtn"
-								value="#{msgs['button.createPost']}"
-								action="#{postsBean.delPost()}">
-							</p:commandButton>
+							<p:commandLink ajax="false" process="@this" immediate="true"
+								action="#{deletePostBean.delete()}" id="deleteButton"
+								styleClass="btn btn-primary createUserBtn">
+								<f:param name="id" value="#{postsBean.post.id}" />
+								<h:outputText value="#{msgs['button.delete']}"
+									title="#{msgs['button.delete']}" alt="#{msgs['button.delete']}"
+									width="20" height="20" />
+							</p:commandLink>
 						</div>
 					</h:form>
 					<br />

@@ -15,9 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 import bg.softuni.entity.PostModel;
 import bg.softuni.service.PostServiceLocal;
 
-@ManagedBean(name = "postsBean")
+@ManagedBean(name = "deletePostBean")
 @RequestScoped
-public class PostsBean {
+public class DeletePostBean {
 
 	@Inject
 	HttpServletRequest request;
@@ -40,36 +40,11 @@ public class PostsBean {
 		String id = request.getParameter("id");
 		
 		if(StringUtils.isNotBlank(id) && StringUtils.isNumeric(id)){
-			post = postService.getPostById(Long.valueOf(id));
+			postService.delete(Long.valueOf(id));
 		}
-
-	}
-
-	public List<PostModel> getAllPosts() {
-		
-		List<PostModel> posts = postService.findAllPosts();
-
-		for(PostModel post : posts){
-			if(post.getContent().length() > 150){
-				String cutContent = post.getContent().substring(0, 150);
-				post.setContent(cutContent + "...");
-			}
-		}
-		
-		return posts;
 	}
 	
-	public String redirect(Long id) {
-		postService.delete(id);
+	public String delete(){
 		return "posts";
 	}
-
-	public String confirmDeletePost() {
-		return "confirmDelete";
-	}
-	
-	public String detailsPost(){
-		return "postDetails";
-	}
-
 }

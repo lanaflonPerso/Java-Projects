@@ -18,7 +18,7 @@ public class PostService implements PostServiceLocal{
 	@SuppressWarnings("unchecked")
 	@Override
     public List<PostModel> findAllPosts() {
-        String query = "select model from PostModel model order by upper(model.date) desc";
+        String query = "select model from PostModel model order by model.id desc";
         Query q = entityManager.createQuery(query);
 
         return q.getResultList();
