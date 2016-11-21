@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import bg.softuni.entity.PostModel;
-import bg.softuni.entity.UserModel;
 
 @Stateless
 public class PostService implements PostServiceLocal{
@@ -26,7 +25,7 @@ public class PostService implements PostServiceLocal{
     }
 	
 	@Override
-    public PostModel getPostById(int id) {
+    public PostModel getPostById(Long id){
         PostModel post = entityManager.find(PostModel.class, id);
         return post;
     }
@@ -36,4 +35,18 @@ public class PostService implements PostServiceLocal{
         entityManager.persist(entity);
         return entity;
     }
+	
+	@Override
+	public void delete(Long id){
+		PostModel post = entityManager.find(PostModel.class, id);
+		entityManager.remove(post);
+	}
+	
+    @Override
+    public PostModel update(PostModel entity) {
+        entityManager.merge(entity);
+        entityManager.flush();
+        return entity;
+    }
+
 }

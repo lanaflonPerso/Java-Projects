@@ -31,7 +31,7 @@ public class RegisterBean {
 
 	private UserModel user;
 
-	private static final String REGISTER_PAGE_REDIRECT = "/page/posts?faces-redirect=true";
+	private static final String REGISTER_PAGE_REDIRECT = "/page/index?faces-redirect=true";
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\."
 			+ "[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" + "(\\.[A-Za-z]{2,})$";
@@ -50,7 +50,7 @@ public class RegisterBean {
 
 		String cryptedPassword = GeneralUtils.encodeSha256Password(user.getPassword());
 		user.setPassword(cryptedPassword);
-
+		user.setRole("USER");
 		userService.save(user);
 
 		request.getSession().setAttribute("LOGGED_USER", user);

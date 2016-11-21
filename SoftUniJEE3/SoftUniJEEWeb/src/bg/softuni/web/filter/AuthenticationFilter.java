@@ -13,7 +13,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import bg.softuni.dto.UserDto;
 import bg.softuni.entity.UserModel;
 
 /**
@@ -26,7 +25,7 @@ public class AuthenticationFilter implements Filter, Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String PATH_INDEX_HTML = "/index.html";
 	public static final String PATH_INDEX = "/index.jsp";
-	public static final String PATH_LOGIN = "/page/login.html";
+	public static final String PATH_LOGIN = "/pageAccess/login.html";
 	public static final String PATH_LOGOUT = "/page/logout.jsp";
 	
 

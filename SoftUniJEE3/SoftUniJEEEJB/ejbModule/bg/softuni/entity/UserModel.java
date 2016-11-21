@@ -22,6 +22,7 @@ public class UserModel extends BaseDomainObject {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String role;
 	private List<PostModel> posts;
 	private Long postsCount;
 
@@ -91,6 +92,15 @@ public class UserModel extends BaseDomainObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+    @Column(name = "role", nullable = false)
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.LAZY)

@@ -8,12 +8,12 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
+	<title>Soft Uni JEE</title>
 	<link href="#{application.contextPath}/css/common.css" rel="stylesheet"
 		type="text/css" />
 	<link href="#{application.contextPath}/css/bootstrap.css"
 		rel="stylesheet" type="text/css" />
 </h:head>
-<title>Soft Uni JEE</title>
 <body id="editBody">
 
 	<h:form styleClass="editForm">
@@ -28,60 +28,60 @@
 				<h:outputText value="#{msgs['edit.user.title']}" escape="false" />
 			</h3>
 
-				<div class="box-field">
-					<label for="username">#{msgs['label.username']}</label>
-					<p:inputText id="username" name="username" styleClass="editInput"
-						value="#{createUserBean.user.username}" 
-						requiredMessage="#{msgs.code_error_required}">
-						<f:validateLength maximum="4000" />
-					</p:inputText>
-				</div>
+			<div class="box-field">
+				<label for="username">#{msgs['label.username']}</label>
+				<p:inputText id="username" name="username" styleClass="editInput"
+					value="#{createUserBean.user.username}"
+					requiredMessage="#{msgs.code_error_required}">
+					<f:validateLength maximum="4000" />
+				</p:inputText>
+			</div>
 
-				<br />
-				<div class="box-field">
-					<label for="password">#{msgs['label.password']}</label>
-					<p:password id="password" name="password" styleClass="editInput"
-						value="#{createUserBean.user.password}" 
-						requiredMessage="#{msgs.code_error_required}">
-						<f:validateLength maximum="4000" />
-					</p:password>
-				</div>
-				<br />
-				<div class="box-field">
-					<label for="firstName">#{msgs['label.firstName']}</label>
-					<p:inputText id="firstName" name="firstName"
-						styleClass="editInput" value="#{createUserBean.user.firstName}"
-						 requiredMessage="#{msgs.code_error_required}">
-						<f:validateLength maximum="4000" />
-					</p:inputText>
-				</div>
-				<br />
-				<div class="box-field">
-					<label for="lastName" class="editlabel">#{msgs['label.lastName']}</label>
-					<p:inputText id="lastName" name="lastName" styleClass="editInput"
-						value="#{createUserBean.user.lastName}" 
-						requiredMessage="#{msgs.code_error_required}">
-						<f:validateLength maximum="4000" />
-					</p:inputText>
-				</div>
-				<br />
-				<div class="box-field">
-					<label for="email">#{msgs['label.email']}</label>
-					<p:inputText id="email" name="email" styleClass="editInput"
-						value="#{createUserBean.user.email}" 
-						requiredMessage="#{msgs.code_error_required}">
-						<f:validateLength maximum="4000" />
-					</p:inputText>
-				</div>
+			<br />
+			<div class="box-field">
+				<label for="password">#{msgs['label.password']}</label>
+				<p:password id="password" name="password" styleClass="editInput"
+					value="#{createUserBean.user.password}"
+					requiredMessage="#{msgs.code_error_required}">
+					<f:validateLength maximum="4000" />
+				</p:password>
+			</div>
+			<br />
+			<div class="box-field">
+				<label for="firstName">#{msgs['label.firstName']}</label>
+				<p:inputText id="firstName" name="firstName" styleClass="editInput"
+					value="#{createUserBean.user.firstName}"
+					requiredMessage="#{msgs.code_error_required}">
+					<f:validateLength maximum="4000" />
+				</p:inputText>
+			</div>
+			<br />
+			<div class="box-field">
+				<label for="lastName" class="editlabel">#{msgs['label.lastName']}</label>
+				<p:inputText id="lastName" name="lastName" styleClass="editInput"
+					value="#{createUserBean.user.lastName}"
+					requiredMessage="#{msgs.code_error_required}">
+					<f:validateLength maximum="4000" />
+				</p:inputText>
+			</div>
+			<br />
+			<div class="box-field">
+				<label for="email">#{msgs['label.email']}</label>
+				<p:inputText id="email" name="email" styleClass="editInput"
+					value="#{createUserBean.user.email}"
+					requiredMessage="#{msgs.code_error_required}">
+					<f:validateLength maximum="4000" />
+				</p:inputText>
+			</div>
 
-				<br />
+			<br />
 
-				<div class="box-field">
-					<p:commandButton ajax="false" id="updateuserBtn"
-						styleClass="btn btn-primary createUserBtn"
-						value="#{msgs['button.create']}"
-						action="#{createUserBean.createAction}">
-					</p:commandButton>
+			<div class="box-field">
+				<p:commandButton ajax="false" id="updateuserBtn"
+					styleClass="btn btn-primary createUserBtn"
+					value="#{msgs['button.register']}"
+					action="#{createUserBean.createAction}">
+				</p:commandButton>
 
 			</div>
 

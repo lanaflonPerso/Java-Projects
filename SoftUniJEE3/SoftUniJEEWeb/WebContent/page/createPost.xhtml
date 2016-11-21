@@ -22,18 +22,18 @@
 				</p:outputPanel>
 
 				<h1 class="text-primary bold upper headPaddings">
-					<h:outputText value="#{msgs['edit.post.title']}" escape="false" />
+					<h:outputText value="#{msgs['create.post.title']}" escape="false" />
 				</h1>
 
 				<br />
 
 				<h:panelGroup layout="block">
 					<label for="username" class="col-sm-1 control-label">#{msgs['label.title']}</label>
-					<p:inputText id="username" name="username" styleClass="editInput"
-						cols="60" value="#{createPostBean.post.title}"
+					<p:inputTextarea id="username" name="username" styleClass="editInput"
+						cols="60" rows="2" value="#{createPostBean.post.title}"
 						requiredMessage="#{msgs.code_error_required}">
 						<f:validateLength maximum="4000" />
-					</p:inputText>
+					</p:inputTextarea>
 				</h:panelGroup>
 
 				<br clear="all" />
